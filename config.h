@@ -855,7 +855,7 @@ static const char *dmenucmd[] = {
 };
 static const char *roficmd[] = {
   "rofi", "-show", "drun", NULL
-}
+};
 static const char *termcmd[]  = { "alacritty", NULL };
 
 #if BAR_STATUSCMD_PATCH
