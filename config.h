@@ -853,9 +853,9 @@ static const char *dmenucmd[] = {
 	#endif // BAR_DMENUMATCHTOP_PATCH
 	NULL
 };
-static const char *roficmd[] = {
-  "rofi", "-show", "drun", NULL
-};
+static const char *roficmd[] = { "rofi", "-show", "drun", NULL };
+static const char *autoflameshot[] = { "flameshot", "gui", "-p", "~/images/screenshots", "-s", NULL };
+static const char *manflameshot[] = { "flameshot", "gui", NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 
 #if BAR_STATUSCMD_PATCH
@@ -889,6 +889,8 @@ static const Key keys[] = {
 	#endif // KEYMODES_PATCH
 	{ MODKEY,                       XK_r,          spawn,                  {.v = roficmd } },
 	{ MODKEY,                       XK_Return,     spawn,                  {.v = termcmd } },
+	{ MODKEY,                       XK_s,          spawn,                  {.v = autoflameshot } },
+	{ MODKEY|ShiftMask,                       XK_s,          spawn,                  {.v = manflameshot } },
 	#if RIODRAW_PATCH
 	{ MODKEY|ControlMask,           XK_p,          riospawnsync,           {.v = dmenucmd } },
 	{ MODKEY|ControlMask,           XK_Return,     riospawn,               {.v = termcmd } },
