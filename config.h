@@ -2,7 +2,7 @@
 
 /* appearance */
 #if ROUNDED_CORNERS_PATCH
-static const unsigned int borderpx       = 0;   /* border pixel of windows */
+static const unsigned int borderpx       = 5;   /* border pixel of windows */
 static const int corner_radius           = 10;
 #else
 static const unsigned int borderpx       = 1;   /* border pixel of windows */
@@ -853,6 +853,9 @@ static const char *dmenucmd[] = {
 	#endif // BAR_DMENUMATCHTOP_PATCH
 	NULL
 };
+static const char *roficmd[] = {
+  "rofi", "-show", "drun", NULL
+}
 static const char *termcmd[]  = { "alacritty", NULL };
 
 #if BAR_STATUSCMD_PATCH
@@ -872,7 +875,7 @@ static const char *statuscmd[] = { "/bin/sh", "-c", NULL, NULL };
 #endif // BAR_STATUSCMD_PATCH
 
 #if ON_EMPTY_KEYS_PATCH
-static const char* firefoxcmd[] = {"firefox", NULL};
+static const char* firefoxcmd[] = {"waterfox-g4", NULL};
 static const Key on_empty_keys[] = {
 	/* modifier key            function                argument */
 	{ 0,        XK_f,          spawn,                  {.v = firefoxcmd } },
@@ -884,8 +887,8 @@ static const Key keys[] = {
 	#if KEYMODES_PATCH
 	{ MODKEY,                       XK_Escape,     setkeymode,             {.ui = COMMANDMODE} },
 	#endif // KEYMODES_PATCH
-	{ MODKEY,                       XK_p,          spawn,                  {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return,     spawn,                  {.v = termcmd } },
+	{ MODKEY,                       XK_r,          spawn,                  {.v = roficmd } },
+	{ MODKEY,                       XK_Return,     spawn,                  {.v = termcmd } },
 	#if RIODRAW_PATCH
 	{ MODKEY|ControlMask,           XK_p,          riospawnsync,           {.v = dmenucmd } },
 	{ MODKEY|ControlMask,           XK_Return,     riospawn,               {.v = termcmd } },
