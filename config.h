@@ -1,8 +1,9 @@
 /* See LICENSE file for copyright and license details. */
+#include <X11/XF86keysym.h>
 
 /* appearance */
 #if ROUNDED_CORNERS_PATCH
-static const unsigned int borderpx       = 0;   /* border pixel of windows */
+static const unsigned int borderpx       = 5;   /* border pixel of windows */
 static const int corner_radius           = 10;
 #else
 static const unsigned int borderpx       = 1;   /* border pixel of windows */
@@ -854,9 +855,8 @@ static const char *dmenucmd[] = {
 	NULL
 };
 static const char *roficmd[] = { "rofi", "-show", "drun", NULL };
-static const char *autoflameshot[] = { "flameshot", "gui", "-p", "~/images/screenshots", "-s", NULL };
+static const char *autoflameshot[] = { "flameshot", "gui", "-p", "/home/mokou/images/screenshots", "-s", NULL };
 static const char *manflameshot[] = { "flameshot", "gui", NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
 
 #if BAR_STATUSCMD_PATCH
 #if BAR_DWMBLOCKS_PATCH
@@ -875,7 +875,6 @@ static const char *statuscmd[] = { "/bin/sh", "-c", NULL, NULL };
 #endif // BAR_STATUSCMD_PATCH
 
 #if ON_EMPTY_KEYS_PATCH
-static const char* firefoxcmd[] = {"waterfox-g4", NULL};
 static const Key on_empty_keys[] = {
 	/* modifier key            function                argument */
 	{ 0,        XK_f,          spawn,                  {.v = firefoxcmd } },
@@ -887,10 +886,14 @@ static const Key keys[] = {
 	#if KEYMODES_PATCH
 	{ MODKEY,                       XK_Escape,     setkeymode,             {.ui = COMMANDMODE} },
 	#endif // KEYMODES_PATCH
+	{ MODKEY,                       XK_Return,     spawn,                  SHCMD("$TERMINAL") },
+	{ MODKEY,                       XK_b,          spawn,                  SHCMD("$BROWSER") },
+	{ MODKEY,                       XK_b,          spawn,                  SHCMD("$BROWSER") },
 	{ MODKEY,                       XK_r,          spawn,                  {.v = roficmd } },
-	{ MODKEY,                       XK_Return,     spawn,                  {.v = termcmd } },
 	{ MODKEY,                       XK_s,          spawn,                  {.v = autoflameshot } },
-	{ MODKEY|ShiftMask,                       XK_s,          spawn,                  {.v = manflameshot } },
+	{ MODKEY|ShiftMask,             XK_s,          spawn,                  {.v = manflameshot } },
+	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("pamixer --allow-boost -i 3; kill -44 $(pidof dwmblocks)") },
+	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("pamixer --allow-boost -d 3; kill -44 $(pidof dwmblocks)") },
 	#if RIODRAW_PATCH
 	{ MODKEY|ControlMask,           XK_p,          riospawnsync,           {.v = dmenucmd } },
 	{ MODKEY|ControlMask,           XK_Return,     riospawn,               {.v = termcmd } },
