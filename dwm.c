@@ -42,6 +42,7 @@
 #include <X11/Xft/Xft.h>
 
 #include "patches.h"
+#include "themes/gruv.h"
 #include "drw.h"
 #include "util.h"
 
